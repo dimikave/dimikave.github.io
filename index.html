@@ -59,7 +59,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(0, 255, 0, 0.01) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 255, 0, 0.01) 1px, transparent 1px);
             background-size: 20px 20px;
@@ -367,12 +367,36 @@
             color: #666;
         }
 
-        /* GitHub Stats */
-        .stats-container {
+        /* GitHub Stats - Collapsible Section */
+        .github-stats-toggle {
+            text-align: center;
+            margin-top: 30px;
+            cursor: pointer;
+            color: #00ffff;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: color 0.3s ease;
+        }
+
+        .github-stats-toggle:hover {
+            color: #00ff00;
+        }
+
+        .github-stats-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 20px;
             margin-top: 25px;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            overflow: hidden;
+            max-height: 500px; /* Initial height, adjust as needed */
+            opacity: 1;
+        }
+
+        .github-stats-container.collapsed {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none; /* Prevent interaction when collapsed */
         }
 
         .stat-card {
@@ -403,6 +427,51 @@
             transform: scale(1.02);
         }
 
+        /* New Section: Other Interests */
+        .other-interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .interest-item {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-left: 4px solid #00ffff;
+            padding: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Fira Code', monospace;
+            text-align: center;
+        }
+
+        .interest-item:hover {
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .interest-item i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+
+        .interest-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #00ffff;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .interest-item p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
         /* Scrollbar styling */
         ::-webkit-scrollbar {
             width: 12px;
@@ -426,28 +495,29 @@
             .name {
                 font-size: 2rem;
             }
-            
+
             .typing-text {
                 font-size: 1.1rem;
             }
-            
+
             .social-links {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .terminal-content {
                 padding: 20px;
             }
-            
+
             .section-title {
                 font-size: 1.5rem;
             }
-            
-            .interests-grid {
+
+            .interests-grid,
+            .other-interests-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .stats-container {
                 grid-template-columns: 1fr;
             }
@@ -479,7 +549,7 @@
 </head>
 <body>
     <div class="matrix-bg" id="matrixBg"></div>
-    
+
     <header class="header">
         <div class="container">
             <div class="terminal-header">
@@ -490,7 +560,7 @@
                 </div>
                 <span class="terminal-title">dimitris@engineer:~$</span>
             </div>
-            
+
             <div class="ascii-art">
     ____  _           _ _  __                
    |  _ \(_)_ __ ___ (_) |/ /__ ___   _____ 
@@ -498,16 +568,16 @@
    | |_| | | | | | | | | . \ (_| |\ V /  __/
    |____/|_|_| |_| |_|_|_|\_\__,_| \_/ \___|
             </div>
-            
+
             <h1 class="name">Dimitris Kavelidis Frantzis</h1>
-            
+
             <div class="typing-container">
                 <div class="typing-text">
                     <span id="typingText"></span>
                     <span class="typing-cursor">█</span>
                 </div>
             </div>
-            
+
             <div class="social-links">
                 <a href="https://dimikave.github.io/" class="social-link">
                     <i class="fas fa-globe"></i>
@@ -556,43 +626,43 @@
             </div>
             <div class="terminal-content">
                 <h2 class="section-title">My Interests & Expertise</h2>
-                
+
                 <div class="interests-grid">
                     <div class="interest-card">
                         <h4><i class="fas fa-server"></i>backend_engineering</h4>
                         <p>Building scalable and robust server-side applications</p>
                     </div>
-                    
+
                     <div class="interest-card">
                         <h4><i class="fas fa-cubes"></i>microservices</h4>
                         <p>Designing distributed systems and service-oriented architectures</p>
                     </div>
-                    
+
                     <div class="interest-card">
                         <h4><i class="fas fa-cloud"></i>serverless_compute</h4>
                         <p>Developing cloud-native solutions with AWS Lambda and similar technologies</p>
                     </div>
-                    
+
                     <div class="interest-card">
                         <h4><i class="fas fa-microchip"></i>iot_devices</h4>
                         <p>Creating connected devices and IoT ecosystems</p>
                     </div>
-                    
+
                     <div class="interest-card">
                         <h4><i class="fas fa-users"></i>user_management</h4>
                         <p>Implementing secure authentication and authorization systems</p>
                     </div>
-                    
+
                     <div class="interest-card">
                         <h4><i class="fab fa-aws"></i>aws_cloud</h4>
                         <p>Leveraging cloud services for scalable infrastructure and deployment</p>
                     </div>
-                    
+
                     <div class="interest-card">
                         <h4><i class="fas fa-robot"></i>ai_agents</h4>
                         <p>Developing intelligent systems and automated decision-making solutions</p>
                     </div>
-                    
+
                     <div class="interest-card">
                         <h4><i class="fas fa-heartbeat"></i>biomedical_eng</h4>
                         <p>Applying technology to healthcare and medical device development</p>
@@ -612,18 +682,65 @@
             </div>
             <div class="terminal-content">
                 <h2 class="section-title">GitHub Stats</h2>
-                
-                <div class="stats-container">
+                <div class="github-stats-toggle">
+                    <i class="fas fa-chevron-down"></i> Toggle GitHub Stats
+                </div>
+                <div class="stats-container github-stats-container">
                     <div class="stat-card">
                         <img src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=dimikave&theme=dracula" alt="Profile Details">
                     </div>
-                    
+
                     <div class="stat-card">
                         <img src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=dimikave&theme=dracula" alt="Repos per Language">
                     </div>
-                    
+
                     <div class="stat-card">
                         <img src="http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=dimikave&theme=dracula" alt="Most Commit Language">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="terminal-window">
+            <div class="terminal-window-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <span class="window-title">hobbies.md - My Other Pursuits</span>
+            </div>
+            <div class="terminal-content">
+                <h2 class="section-title">My Other Interests</h2>
+                <div class="other-interests-grid">
+                    <div class="interest-item">
+                        <i class="fas fa-skiing"></i>
+                        <h4>Skiing</h4>
+                        <p>Carving down pristine slopes, feeling the wind and freedom.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-mountain"></i>
+                        <h4>Climbing</h4>
+                        <p>Conquering vertical challenges, one grip at a time.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-anchor"></i>
+                        <h4>Sailing</h4>
+                        <p>Navigating the open waters, harnessing the power of the wind.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-music"></i>
+                        <h4>Music Production</h4>
+                        <p>Crafting sonic landscapes, building rhythms and melodies.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-palette"></i>
+                        <h4>Painting</h4>
+                        <p>Translating thoughts and emotions onto canvas with vibrant strokes.</p>
                     </div>
                 </div>
             </div>
@@ -637,22 +754,22 @@
         function createMatrixRain() {
             const matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
             const columns = Math.floor(window.innerWidth / 20);
-            
+
             for (let i = 0; i < 15; i++) {
                 setTimeout(() => {
                     const column = document.createElement('div');
                     column.className = 'matrix-column';
                     column.style.left = Math.random() * 100 + 'vw';
                     column.style.animationDuration = (Math.random() * 5 + 3) + 's';
-                    
+
                     let text = '';
                     for (let j = 0; j < 20; j++) {
                         text += matrixChars[Math.floor(Math.random() * matrixChars.length)] + '<br>';
                     }
                     column.innerHTML = text;
-                    
+
                     document.getElementById('matrixBg').appendChild(column);
-                    
+
                     setTimeout(() => {
                         column.remove();
                     }, 5000);
@@ -667,18 +784,18 @@
         // Typing animation
         const texts = [
             "Software / Cloud Engineer",
-            "Backend Engineer", 
+            "Backend Engineer",
             "M.Eng. Electrical and Computer Engineering"
         ];
-        
+
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
         const textElement = document.getElementById('typingText');
-        
+
         function typeWriter() {
             const currentText = texts[textIndex];
-            
+
             if (isDeleting) {
                 textElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
@@ -686,9 +803,9 @@
                 textElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
             }
-            
+
             let typeSpeed = isDeleting ? 50 : 100;
-            
+
             if (!isDeleting && charIndex === currentText.length) {
                 typeSpeed = 2000;
                 isDeleting = true;
@@ -697,10 +814,10 @@
                 textIndex = (textIndex + 1) % texts.length;
                 typeSpeed = 500;
             }
-            
+
             setTimeout(typeWriter, typeSpeed);
         }
-        
+
         setTimeout(typeWriter, 1000);
 
         // Console log messages
@@ -714,10 +831,10 @@
         function showConsoleLog() {
             const consoleLog = document.getElementById('consoleLog');
             const message = consoleMessages[Math.floor(Math.random() * consoleMessages.length)];
-            
+
             consoleLog.textContent = message;
             consoleLog.classList.add('show');
-            
+
             setTimeout(() => {
                 consoleLog.classList.remove('show');
             }, 3000);
@@ -748,17 +865,35 @@
             if (konamiCode.length > konamiSequence.length) {
                 konamiCode.shift();
             }
-            
+
             if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
                 const consoleLog = document.getElementById('consoleLog');
                 consoleLog.textContent = 'Achievement Unlocked: 1337 H4x0r! 🚀';
                 consoleLog.style.color = '#ff6b6b';
                 consoleLog.classList.add('show');
-                
+
                 setTimeout(() => {
                     consoleLog.classList.remove('show');
                     consoleLog.style.color = '#00ff00';
                 }, 5000);
+            }
+        });
+
+        // GitHub Stats Toggle Functionality
+        const githubStatsToggle = document.querySelector('.github-stats-toggle');
+        const githubStatsContainer = document.querySelector('.github-stats-container');
+        const toggleIcon = githubStatsToggle.querySelector('i');
+
+        githubStatsToggle.addEventListener('click', () => {
+            githubStatsContainer.classList.toggle('collapsed');
+            if (githubStatsContainer.classList.contains('collapsed')) {
+                toggleIcon.classList.remove('fa-chevron-down');
+                toggleIcon.classList.add('fa-chevron-up');
+                githubStatsToggle.innerHTML = '<i class="fas fa-chevron-up"></i> Show GitHub Stats';
+            } else {
+                toggleIcon.classList.remove('fa-chevron-up');
+                toggleIcon.classList.add('fa-chevron-down');
+                githubStatsToggle.innerHTML = '<i class="fas fa-chevron-down"></i> Hide GitHub Stats';
             }
         });
     </script>
