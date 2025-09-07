@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* Matrix Rain Effect */
+        /* Matrix Rain Effect - Updated with dimmer colors */
         .matrix-bg {
             position: fixed;
             top: 0;
@@ -40,9 +40,9 @@
             top: -100px;
             font-family: 'Fira Code', monospace;
             font-size: 14px;
-            color: #00ff00;
+            color: rgba(0, 100, 0, 0.8); /* Much dimmer green */
             animation: matrixFall linear infinite;
-            text-shadow: 0 0 10px #00ff00;
+            text-shadow: 0 0 5px rgba(0, 100, 0, 0.3); /* Reduced glow */
         }
 
         @keyframes matrixFall {
@@ -51,7 +51,7 @@
             }
         }
 
-        /* Terminal-style grid overlay */
+        /* Terminal-style grid overlay - also dimmed */
         body::before {
             content: '';
             position: fixed;
@@ -60,8 +60,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(0, 255, 0, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.01) 1px, transparent 1px);
             background-size: 20px 20px;
             pointer-events: none;
             z-index: -1;
@@ -243,27 +243,35 @@
             color: #ff6b6b;
         }
 
-        /* Current Work Section */
+        /* Current Work Section - Enhanced visibility */
         .current-work {
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 255, 255, 0.1));
-            border: 1px solid #00ff00;
-            padding: 25px;
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.15), rgba(0, 255, 255, 0.15));
+            border: 2px solid #00ff00;
+            padding: 30px;
             border-radius: 8px;
             margin-bottom: 30px;
             position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
         }
 
         .current-work::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: #00ff00;
-            border-radius: 8px;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #00ff00, #00ffff, #00ff00);
+            border-radius: 10px;
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.4;
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.7; }
         }
 
         .current-work h3 {
@@ -271,11 +279,20 @@
             margin-bottom: 15px;
             color: #00ffff;
             font-family: 'Fira Code', monospace;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
         }
 
         .current-work h3::before {
             content: '> ';
             color: #ff6b6b;
+        }
+
+        .current-work p {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #00ffff;
         }
 
         /* Code Block Style for Interests */
@@ -525,7 +542,7 @@
             <h3><i class="fas fa-laptop-code"></i> Currently Working On</h3>
             <p>Various domains, including IoT devices ecosystems, microservices and serverless architectures, for rapid development of energy disaggregation & consumption insights applications (and more).</p>
             <br>
-            <p><strong>Current Role:</strong> Contributing to innovative energy solutions at <a href="https://www.net2grid.com/developers" target="_blank" rel="noopener noreferrer" style="color: #00ffff; text-decoration: none; border-bottom: 1px dotted #00ffff;">NET2GRID</a> backend platform - building smart energy management systems and APIs for the future of sustainable energy.</p>
+            <p><strong>Current Role:</strong> Driving innovation at <a href="https://www.net2grid.com/developers" target="_blank" rel="noopener noreferrer" style="color: #00ffff; text-decoration: none; border-bottom: 1px dotted #00ffff;">NET2GRID</a> by contributing to the backend platform for a real-time energy analytics solution. My work focuses on developing scalable APIs and data pipelines that transform raw smart meter data into actionable intelligence. This technology is key to empowering energy providers to build smarter grids, reduce energy waste, and accelerate the transition to sustainable energy.</p>
         </section>
 
         <section class="terminal-window">
@@ -626,7 +643,7 @@
                     const column = document.createElement('div');
                     column.className = 'matrix-column';
                     column.style.left = Math.random() * 100 + 'vw';
-                    column.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    column.style.animationDuration = (Math.random() * 5 + 3) + 's';
                     
                     let text = '';
                     for (let j = 0; j < 20; j++) {
