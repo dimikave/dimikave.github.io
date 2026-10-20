@@ -56,6 +56,41 @@
             z-index: 0;
         }
 
+        .matrix-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -120px;
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            line-height: 1.2;
+            color: rgba(25, 255, 138, 0.7);
+            text-shadow: 0 0 8px rgba(25, 255, 138, 0.18);
+            animation: matrixFall linear forwards;
+            white-space: nowrap;
+        }
+
+        @keyframes matrixFall {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+
         a {
             color: inherit;
             text-decoration: none;
@@ -623,6 +658,8 @@
     </style>
 </head>
 <body>
+    <div class="matrix-bg" id="matrixBg"></div>
+
     <div class="page-shell">
         <div class="phone">
             <div class="statusbar">
@@ -820,105 +857,77 @@
     </div>
 
     <script>
-        // Matrix rain effect
-        function createMatrixRain() {
-            const matrixChars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-            const columns = Math.floor(window.innerWidth / 18);
+        const matrixBg = document.getElementById("matrixBg");
+        const matrixChars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
 
-            for (let i = 0; i < 14; i++) {
-                setTimeout(() => {
-                    const column = document.createElement("div");
-                    column.className = "matrix-column";
-                    column.style.left = (Math.random() * 100) + "vw";
-                    column.style.animationDuration = (Math.random() * 6 + 4) + "s";
+        function createColumn() {
+            if (!matrixBg) return;
 
-                    let text = "";
-                    for (let j = 0; j < 18; j++) {
-                        text += matrixChars[Math.floor(Math.random() * matrixChars.length)] + "<br>";
-                    }
-                    column.innerHTML = text;
+            const col = document.createElement("div");
+            col.className = "matrix-column";
+            col.style.left = (Math.random() * 100) + "vw";
+            col.style.animationDuration = (Math.random() * 4 + 4) + "s";
+            col.style.opacity = (Math.random() * 0.5 + 0.25).toFixed(2);
 
-                    const bg = document.querySelector(".matrix-bg");
-                    if (bg) {
-                        bg.appendChild(column);
-                    }
-
-                    setTimeout(() => column.remove(), 5000);
-                }, i * 180);
+            const lines = [];
+            for (let i = 0; i < 18; i++) {
+                lines.push(matrixChars[Math.floor(Math.random() * matrixChars.length)]);
             }
+            col.innerHTML = lines.join("<br>");
+
+            matrixBg.appendChild(col);
+
+            setTimeout(() => {
+                col.remove();
+            }, 5200);
         }
 
-        if (!document.querySelector(".matrix-bg")) {
-            const bg = document.createElement("div");
-            bg.className = "matrix-bg";
-            document.body.prepend(bg);
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createColumn, i * 150);
         }
 
-        createMatrixRain();
-        setInterval(createMatrixRain, 3000);
+        setInterval(createColumn, 180);
 
-        // Typing animation
+        const textElement = document.getElementById("typingText");
         const texts = [
             "Software / Cloud Engineer",
             "Backend Engineer",
             "M.Eng. Electrical and Computer Engineering"
         ];
 
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const textElement = document.getElementById("typingText");
-
-        function typeWriter() {
-            if (!textElement) return;
-
-            const current = texts[textIndex];
-            if (isDeleting) {
-                textElement.textContent = current.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                textElement.textContent = current.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let speed = isDeleting ? 50 : 90;
-
-            if (!isDeleting && charIndex === current.length) {
-                speed = 1800;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-                speed = 400;
-            }
-
-            setTimeout(typeWriter, speed);
-        }
-
-        // If your HTML didn't include a typing element, this will safely do nothing.
         if (textElement) {
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function typeWriter() {
+                const current = texts[textIndex];
+
+                if (isDeleting) {
+                    textElement.textContent = current.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    textElement.textContent = current.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let speed = isDeleting ? 50 : 90;
+
+                if (!isDeleting && charIndex === current.length) {
+                    speed = 1800;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                    speed = 400;
+                }
+
+                setTimeout(typeWriter, speed);
+            }
+
             setTimeout(typeWriter, 800);
         }
 
-        // Optional console log easter egg
-        const consoleMessages = [
-            'console.log("Welcome to my profile!");',
-            'System.out.println("Exploring new technologies...");',
-            'printf("Building scalable solutions\\n");',
-            'echo "Always learning, always coding";'
-        ];
-
-        const consoleLog = document.getElementById("consoleLog");
-        if (consoleLog) {
-            setInterval(() => {
-                const msg = consoleMessages[Math.floor(Math.random() * consoleMessages.length)];
-                consoleLog.textContent = msg;
-                consoleLog.classList.add("show");
-                setTimeout(() => consoleLog.classList.remove("show"), 2200);
-            }, 7000);
-        }
-
-        // Guard the GitHub-toggle code just in case
         const toggle = document.querySelector(".github-stats-toggle");
         const stats = document.querySelector(".github-stats-container");
 
@@ -926,6 +935,7 @@
             const ic = toggle.querySelector("i");
             toggle.addEventListener("click", () => {
                 stats.classList.toggle("collapsed");
+
                 if (stats.classList.contains("collapsed")) {
                     ic.classList.remove("fa-chevron-down");
                     ic.classList.add("fa-chevron-up");
