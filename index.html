@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* Matrix Rain Effect - Updated with dimmer colors */
+        /* Matrix Rain Effect */
         .matrix-bg {
             position: fixed;
             top: 0;
@@ -40,9 +40,9 @@
             top: -100px;
             font-family: 'Fira Code', monospace;
             font-size: 14px;
-            color: rgba(0, 100, 0, 0.8); /* Much dimmer green */
+            color: rgba(0, 100, 0, 0.8);
             animation: matrixFall linear infinite;
-            text-shadow: 0 0 5px rgba(0, 100, 0, 0.3); /* Reduced glow */
+            text-shadow: 0 0 5px rgba(0, 100, 0, 0.3);
         }
 
         @keyframes matrixFall {
@@ -51,7 +51,6 @@
             }
         }
 
-        /* Terminal-style grid overlay - also dimmed */
         body::before {
             content: '';
             position: fixed;
@@ -74,7 +73,6 @@
             position: relative;
         }
 
-        /* Terminal Header */
         .header {
             text-align: center;
             padding: 60px 0;
@@ -201,7 +199,6 @@
             transform: translateY(-2px);
         }
 
-        /* Terminal Windows */
         .terminal-window {
             background: rgba(0, 0, 0, 0.95);
             border: 2px solid #00ff00;
@@ -243,7 +240,6 @@
             color: #ff6b6b;
         }
 
-        /* Current Work Section - Enhanced visibility */
         .current-work {
             background: linear-gradient(135deg, rgba(0, 255, 0, 0.15), rgba(0, 255, 255, 0.15));
             border: 2px solid #00ff00;
@@ -295,23 +291,38 @@
             border-left: 3px solid #00ffff;
         }
 
-        /* Code Block Style for Interests */
-        .interests-grid {
+        .interests-grid,
+        .other-interests-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
             gap: 20px;
+            width: 100%;
             margin-top: 25px;
         }
 
-        .interest-card {
+        .interest-card,
+        .interest-item {
             background: rgba(0, 0, 0, 0.8);
             border: 1px solid #333;
-            border-left: 4px solid #00ff00;
-            padding: 20px;
             border-radius: 5px;
             transition: all 0.3s ease;
             position: relative;
             font-family: 'Fira Code', monospace;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .interest-card {
+            border-left: 4px solid #00ff00;
+            padding: 20px;
+        }
+
+        .interest-item {
+            border-left: 4px solid #00ffff;
+            padding: 20px;
+            text-align: center;
         }
 
         .interest-card::before {
@@ -330,19 +341,22 @@
             transform: scaleX(1);
         }
 
-        .interest-card:hover {
+        .interest-card:hover,
+        .interest-item:hover {
             border-color: #00ff00;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
             transform: translateY(-3px);
         }
 
-        .interest-card h4 {
+        .interest-card h4,
+        .interest-item h4 {
             font-size: 1.1rem;
             margin-bottom: 10px;
             color: #00ffff;
             display: flex;
             align-items: center;
             gap: 10px;
+            justify-content: center;
         }
 
         .interest-card h4::before {
@@ -356,7 +370,8 @@
             color: #ffff00;
         }
 
-        .interest-card p {
+        .interest-card p,
+        .interest-item p {
             color: #aaa;
             font-size: 0.9rem;
             padding-left: 20px;
@@ -367,7 +382,13 @@
             color: #666;
         }
 
-        /* GitHub Stats - Collapsible Section */
+        .interest-item i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+
         .github-stats-toggle {
             text-align: center;
             margin-top: 30px;
@@ -389,14 +410,14 @@
             margin-top: 25px;
             transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
             overflow: hidden;
-            max-height: 500px; /* Initial height, adjust as needed */
+            max-height: 500px;
             opacity: 1;
         }
 
         .github-stats-container.collapsed {
             max-height: 0;
             opacity: 0;
-            pointer-events: none; /* Prevent interaction when collapsed */
+            pointer-events: none;
         }
 
         .stat-card {
@@ -427,52 +448,6 @@
             transform: scale(1.02);
         }
 
-        /* New Section: Other Interests */
-        .other-interests-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .interest-item {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #333;
-            border-left: 4px solid #00ffff;
-            padding: 20px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            position: relative;
-            font-family: 'Fira Code', monospace;
-            text-align: center;
-        }
-
-        .interest-item:hover {
-            border-color: #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .interest-item i {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #00ffff;
-            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
-        }
-
-        .interest-item h4 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: #00ffff;
-            font-family: 'Fira Code', monospace;
-        }
-
-        .interest-item p {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        /* Scrollbar styling */
         ::-webkit-scrollbar {
             width: 12px;
         }
@@ -490,7 +465,6 @@
             background: #00ffff;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .name {
                 font-size: 2rem;
@@ -516,14 +490,19 @@
             .interests-grid,
             .other-interests-grid {
                 grid-template-columns: 1fr;
+                gap: 14px;
             }
 
-            .stats-container {
+            .interest-card,
+            .interest-item {
+                padding: 16px;
+            }
+
+            .github-stats-container {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Console log animation */
         .console-log {
             position: fixed;
             bottom: 20px;
@@ -666,40 +645,601 @@
                     <div class="interest-card">
                         <h4><i class="fas fa-heartbeat"></i>biomedical_eng</h4>
                         <p>Applying technology to healthcare and medical device development</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimitris Kavelidis Frantzis - Software/Cloud Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!--         <section class="terminal-window">
-            <div class="terminal-window-header">
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            line-height: 1.6;
+            color: #00ff00;
+            background: #0a0a0a;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            color: rgba(0, 100, 0, 0.8);
+            animation: matrixFall linear infinite;
+            text-shadow: 0 0 5px rgba(0, 100, 0, 0.3);
+        }
+
+        @keyframes matrixFall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 255, 0, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.01) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+
+        .terminal-header {
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid #00ff00;
+            margin: -60px -2px 30px -2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-button.close { background: #ff5f56; }
+        .terminal-button.minimize { background: #ffbd2e; }
+        .terminal-button.maximize { background: #27ca3f; }
+
+        .terminal-title {
+            color: #666;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .ascii-art {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #00ff00;
+            white-space: pre;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .name::before {
+            content: '> ';
+            color: #ff6b6b;
+        }
+
+        .typing-container {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .typing-text {
+            font-size: 1.4rem;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .typing-text::before {
+            content: '$ ';
+            color: #ff6b6b;
+        }
+
+        .typing-cursor {
+            animation: blink 1s infinite;
+            font-weight: bold;
+            background: #00ff00;
+            color: #000;
+            padding: 0 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            color: #00ff00;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .terminal-window {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .terminal-window-header {
+            background: #1a1a1a;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid #00ff00;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .window-title {
+            color: #00ff00;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .terminal-content {
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #00ffff;
+            margin-bottom: 20px;
+            font-family: 'Fira Code', monospace;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .section-title::before {
+            content: '# ';
+            color: #ff6b6b;
+        }
+
+        .current-work {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.15), rgba(0, 255, 255, 0.15));
+            border: 2px solid #00ff00;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
+        }
+
+        .current-work::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #00ff00, #00ffff, #00ff00);
+            border-radius: 10px;
+            z-index: -1;
+            opacity: 0.4;
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.7; }
+        }
+
+        .current-work h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+            font-family: 'Fira Code', monospace;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+
+        .current-work h3::before {
+            content: '> ';
+            color: #ff6b6b;
+        }
+
+        .current-work p {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #00ffff;
+        }
+
+        .interests-grid,
+        .other-interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .interest-card,
+        .interest-item {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Fira Code', monospace;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .interest-card {
+            border-left: 4px solid #00ff00;
+            padding: 20px;
+        }
+
+        .interest-item {
+            border-left: 4px solid #00ffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .interest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff00, transparent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .interest-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .interest-card:hover,
+        .interest-item:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .interest-card h4,
+        .interest-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #00ffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .interest-card h4::before {
+            content: 'def ';
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .interest-card h4::after {
+            content: '():';
+            color: #ffff00;
+        }
+
+        .interest-card p,
+        .interest-item p {
+            color: #aaa;
+            font-size: 0.9rem;
+            padding-left: 20px;
+        }
+
+        .interest-card p::before {
+            content: '    // ';
+            color: #666;
+        }
+
+        .interest-item i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+
+        .github-stats-toggle {
+            text-align: center;
+            margin-top: 30px;
+            cursor: pointer;
+            color: #00ffff;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: color 0.3s ease;
+        }
+
+        .github-stats-toggle:hover {
+            color: #00ff00;
+        }
+
+        .github-stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            overflow: hidden;
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .github-stats-container.collapsed {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .stat-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            filter: brightness(1.1) contrast(1.2);
+        }
+
+        .stat-card img:hover {
+            filter: brightness(1.3) contrast(1.4);
+            transform: scale(1.02);
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00ff00;
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ffff;
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2rem;
+            }
+
+            .typing-text {
+                font-size: 1.1rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .terminal-content {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .interests-grid,
+            .other-interests-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .interest-card,
+            .interest-item {
+                padding: 16px;
+            }
+
+            .github-stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .console-log {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #00ff00;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .console-log.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <header class="header">
+        <div class="container">
+            <div class="terminal-header">
                 <div class="terminal-buttons">
                     <div class="terminal-button close"></div>
                     <div class="terminal-button minimize"></div>
                     <div class="terminal-button maximize"></div>
                 </div>
-                <span class="window-title">github_stats.sh - Analytics Dashboard</span>
+                <span class="terminal-title">dimitris@engineer:~$</span>
             </div>
-            <div class="terminal-content">
-                <h2 class="section-title">GitHub Stats</h2>
-                <div class="github-stats-toggle">
-                    <i class="fas fa-chevron-down"></i> Toggle GitHub Stats
-                </div>
-                <div class="stats-container github-stats-container">
-                    <div class="stat-card">
-                        <img src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=dimikave&theme=dracula" alt="Profile Details">
-                    </div>
 
-                    <div class="stat-card">
-                        <img src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=dimikave&theme=dracula" alt="Repos per Language">
-                    </div>
+            <div class="ascii-art">
+    ____  _           _ _  __                
+   |  _ \(_)_ __ ___ (_) |/ /__ ___   _____ 
+   | | | | | '_ ` _ \| | ' // _` \ \ / / _ \
+   | |_| | | | | | | | | . \ (_| |\ V /  __/
+   |____/|_|_| |_| |_|_|_|\_\__,_| \_/ \___|
+            </div>
 
-                    <div class="stat-card">
-                        <img src="http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=dimikave&theme=dracula" alt="Most Commit Language">
-                    </div>
+            <h1 class="name">Dimitris Kavelidis Frantzis</h1>
+
+            <div class="typing-container">
+                <div class="typing-text">
+                    <span id="typingText"></span>
+                    <span class="typing-cursor">█</span>
                 </div>
             </div>
-        </section> -->
+
+            <div class="social-links">
+                <a href="https://dimikave.github.io/" class="social-link">
+                    <i class="fas fa-globe"></i>
+                    ./website
+                </a>
+                <a href="https://www.linkedin.com/in/dimitris-kavelidis-frantzis-50691a1b8/" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                    --linkedin
+                </a>
+                <a href="mailto:dimitris.kave@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                    --email
+                </a>
+                <a href="./cv2026.pdf" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i>
+                    download --cv
+                </a>
+                <a href="https://pypi.org/user/dimikave/" class="social-link">
+                    <i class="fab fa-python"></i>
+                    pip install
+                </a>
+                <a href="https://github.com/dimikave" class="social-link">
+                    <i class="fab fa-github"></i>
+                    git clone
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="current-work">
+            <h3><i class="fas fa-laptop-code"></i> Currently Working On</h3>
+            <p>I believe in a fail-fast approach to building robust, scalable software. My work centers on crafting high-performance systems and leveraging IoT ecosystems, microservices and serverless architectures to solve complex problems and create lasting impact.</p>
+            <br>
+            <p><strong>Last Role:</strong> Driving innovation at <a href="https://www.net2grid.com/developers" target="_blank" rel="noopener noreferrer" style="color: #00ffff; text-decoration: none; border-bottom: 1px dotted #00ffff;">NET2GRID</a> by contributing to the backend platform for a real-time energy analytics solution. My work focuses on developing scalable APIs and data pipelines that transform raw smart meter data into actionable energy disaggregation and consumption insights. This technology is key to empowering energy providers to build smarter grids, reduce energy waste, and accelerate the transition to sustainable energy.</p>
+        </section>
 
         <section class="terminal-window">
             <div class="terminal-window-header">
@@ -708,200 +1248,48 @@
                     <div class="terminal-button minimize"></div>
                     <div class="terminal-button maximize"></div>
                 </div>
-                <span class="window-title">hobbies.md - My Other Pursuits</span>
+                <span class="window-title">interests.py - My Expertise</span>
             </div>
             <div class="terminal-content">
-                <h2 class="section-title">My Other Interests</h2>
-                <div class="other-interests-grid">
-                    <div class="interest-item">
-                        <i class="fas fa-skiing"></i>
-                        <h4>Skiing</h4>
-                        <p>Life is better on the slopes.</p>
+                <h2 class="section-title">My Interests & Expertise</h2>
+
+                <div class="interests-grid">
+                    <div class="interest-card">
+                        <h4><i class="fas fa-server"></i>backend_engineering</h4>
+                        <p>Building scalable and robust server-side applications</p>
                     </div>
 
-                    <div class="interest-item">
-                        <i class="fas fa-mountain"></i>
-                        <h4>Climbing</h4>
-                        <p>Conquering vertical challenges, one grip at a time.</p>
+                    <div class="interest-card">
+                        <h4><i class="fas fa-cubes"></i>microservices</h4>
+                        <p>Designing distributed systems and service-oriented architectures</p>
                     </div>
 
-                    <div class="interest-item">
-                        <i class="fas fa-anchor"></i>
-                        <h4>Sailing</h4>
-                        <p>Following our will and wind, we may just go where no one's been.</p>
+                    <div class="interest-card">
+                        <h4><i class="fas fa-cloud"></i>serverless_compute</h4>
+                        <p>Developing cloud-native solutions with AWS Lambda and similar technologies</p>
                     </div>
 
-                    <div class="interest-item">
-                        <i class="fas fa-music"></i>
-                        <h4>Music Production</h4>
-                        <p>Finding the flow through the creation of tunes.</p>
+                    <div class="interest-card">
+                        <h4><i class="fas fa-microchip"></i>iot_devices</h4>
+                        <p>Creating connected devices and IoT ecosystems</p>
                     </div>
 
-                    <div class="interest-item">
-                        <i class="fas fa-palette"></i>
-                        <h4>Painting</h4>
-                        <p>Emptying my heavy mind into paper.</p>
+                    <div class="interest-card">
+                        <h4><i class="fas fa-users"></i>user_management</h4>
+                        <p>Implementing secure authentication and authorization systems</p>
                     </div>
 
-                    <div class="interest-item">
-                        <i class="fas fa-gamepad"></i>
-                        <h4>Games</h4>
-                        <p>Video games, board games, movement games, you name it, I am all about playing.</p>
+                    <div class="interest-card">
+                        <h4><i class="fab fa-aws"></i>aws_cloud</h4>
+                        <p>Leveraging cloud services for scalable infrastructure and deployment</p>
                     </div>
-                </div>
-            </div>
-        </section>
-    </main>
 
-    <div class="console-log" id="consoleLog"></div>
+                    <div class="interest-card">
+                        <h4><i class="fas fa-robot"></i>ai_agents</h4>
+                        <p>Developing intelligent systems and automated decision-making solutions</p>
+                    </div>
 
-    <script>
-        // Matrix rain effect
-        function createMatrixRain() {
-            const matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-            const columns = Math.floor(window.innerWidth / 20);
-
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const column = document.createElement('div');
-                    column.className = 'matrix-column';
-                    column.style.left = Math.random() * 100 + 'vw';
-                    column.style.animationDuration = (Math.random() * 5 + 3) + 's';
-
-                    let text = '';
-                    for (let j = 0; j < 20; j++) {
-                        text += matrixChars[Math.floor(Math.random() * matrixChars.length)] + '<br>';
-                    }
-                    column.innerHTML = text;
-
-                    document.getElementById('matrixBg').appendChild(column);
-
-                    setTimeout(() => {
-                        column.remove();
-                    }, 5000);
-                }, i * 200);
-            }
-        }
-
-        // Start matrix rain
-        createMatrixRain();
-        setInterval(createMatrixRain, 3000);
-
-        // Typing animation
-        const texts = [
-            "Software / Cloud Engineer",
-            "Backend Engineer",
-            "M.Eng. Electrical and Computer Engineering"
-        ];
-
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const textElement = document.getElementById('typingText');
-
-        function typeWriter() {
-            const currentText = texts[textIndex];
-
-            if (isDeleting) {
-                textElement.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                textElement.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentText.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(typeWriter, typeSpeed);
-        }
-
-        setTimeout(typeWriter, 1000);
-
-        // Console log messages
-        const consoleMessages = [
-            'console.log("Welcome to my profile!");',
-            'System.out.println("Exploring new technologies...");',
-            'printf("Building scalable solutions\\n");',
-            'echo "Always learning, always coding";'
-        ];
-
-        function showConsoleLog() {
-            const consoleLog = document.getElementById('consoleLog');
-            const message = consoleMessages[Math.floor(Math.random() * consoleMessages.length)];
-
-            consoleLog.textContent = message;
-            consoleLog.classList.add('show');
-
-            setTimeout(() => {
-                consoleLog.classList.remove('show');
-            }, 3000);
-        }
-
-        // Show console logs periodically
-        setInterval(showConsoleLog, 8000);
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Easter egg: Konami code
-        let konamiCode = [];
-        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
-
-        document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.code);
-            if (konamiCode.length > konamiSequence.length) {
-                konamiCode.shift();
-            }
-
-            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
-                const consoleLog = document.getElementById('consoleLog');
-                consoleLog.textContent = 'Achievement Unlocked: 1337 H4x0r! 🚀';
-                consoleLog.style.color = '#ff6b6b';
-                consoleLog.classList.add('show');
-
-                setTimeout(() => {
-                    consoleLog.classList.remove('show');
-                    consoleLog.style.color = '#00ff00';
-                }, 5000);
-            }
-        });
-
-        // GitHub Stats Toggle Functionality
-        const githubStatsToggle = document.querySelector('.github-stats-toggle');
-        const githubStatsContainer = document.querySelector('.github-stats-container');
-        const toggleIcon = githubStatsToggle.querySelector('i');
-
-        githubStatsToggle.addEventListener('click', () => {
-            githubStatsContainer.classList.toggle('collapsed');
-            if (githubStatsContainer.classList.contains('collapsed')) {
-                toggleIcon.classList.remove('fa-chevron-down');
-                toggleIcon.classList.add('fa-chevron-up');
-                githubStatsToggle.innerHTML = '<i class="fas fa-chevron-up"></i> Show GitHub Stats';
-            } else {
-                toggleIcon.classList.remove('fa-chevron-up');
-                toggleIcon.classList.add('fa-chevron-down');
-                githubStatsToggle.innerHTML = '<i class="fas fa-chevron-down"></i> Hide GitHub Stats';
-            }
-        });
-    </script>
-</body>
-</html>
+                    <div class="interest-card">
+                        <h4><i class="fas fa-heartbeat"></i>biomedical_eng</h4>
+                        <p>Applying technology to healthcare and medical device development</p>
+       
