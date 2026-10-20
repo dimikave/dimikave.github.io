@@ -645,4 +645,207 @@
                         <h4><i class="fas fa-heartbeat"></i>biomedical_eng</h4>
                         <p>Applying technology to healthcare and medical device development</p>
                     </div>
-             
+                </div>
+            </div>
+        </section>
+
+        <section class="terminal-window">
+            <div class="terminal-window-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <span class="window-title">hobbies.md - My Other Pursuits</span>
+            </div>
+            <div class="terminal-content">
+                <h2 class="section-title">My Other Interests</h2>
+                <div class="other-interests-grid">
+                    <div class="interest-item">
+                        <i class="fas fa-skiing"></i>
+                        <h4>Skiing</h4>
+                        <p>Life is better on the slopes.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-mountain"></i>
+                        <h4>Climbing</h4>
+                        <p>Conquering vertical challenges, one grip at a time.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-anchor"></i>
+                        <h4>Sailing</h4>
+                        <p>Following our will and wind, we may just go where no one's been.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-music"></i>
+                        <h4>Music Production</h4>
+                        <p>Finding the flow through the creation of tunes.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-palette"></i>
+                        <h4>Painting</h4>
+                        <p>Emptying my heavy mind into paper.</p>
+                    </div>
+
+                    <div class="interest-item">
+                        <i class="fas fa-gamepad"></i>
+                        <h4>Games</h4>
+                        <p>Video games, board games, movement games, you name it, I am all about playing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="console-log" id="consoleLog"></div>
+
+    <script>
+        function createMatrixRain() {
+            const matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            const columns = Math.floor(window.innerWidth / 20);
+
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const column = document.createElement('div');
+                    column.className = 'matrix-column';
+                    column.style.left = Math.random() * 100 + 'vw';
+                    column.style.animationDuration = (Math.random() * 5 + 3) + 's';
+
+                    let text = '';
+                    for (let j = 0; j < 20; j++) {
+                        text += matrixChars[Math.floor(Math.random() * matrixChars.length)] + '<br>';
+                    }
+                    column.innerHTML = text;
+
+                    document.getElementById('matrixBg').appendChild(column);
+
+                    setTimeout(() => {
+                        column.remove();
+                    }, 5000);
+                }, i * 200);
+            }
+        }
+
+        createMatrixRain();
+        setInterval(createMatrixRain, 3000);
+
+        const texts = [
+            "Software / Cloud Engineer",
+            "Backend Engineer",
+            "M.Eng. Electrical and Computer Engineering"
+        ];
+
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const textElement = document.getElementById('typingText');
+
+        function typeWriter() {
+            const currentText = texts[textIndex];
+
+            if (isDeleting) {
+                textElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        setTimeout(typeWriter, 1000);
+
+        const consoleMessages = [
+            'console.log("Welcome to my profile!");',
+            'System.out.println("Exploring new technologies...");',
+            'printf("Building scalable solutions\\n");',
+            'echo "Always learning, always coding";'
+        ];
+
+        function showConsoleLog() {
+            const consoleLog = document.getElementById('consoleLog');
+            const message = consoleMessages[Math.floor(Math.random() * consoleMessages.length)];
+
+            consoleLog.textContent = message;
+            consoleLog.classList.add('show');
+
+            setTimeout(() => {
+                consoleLog.classList.remove('show');
+            }, 3000);
+        }
+
+        setInterval(showConsoleLog, 8000);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                const consoleLog = document.getElementById('consoleLog');
+                consoleLog.textContent = 'Achievement Unlocked: 1337 H4x0r! 🚀';
+                consoleLog.style.color = '#ff6b6b';
+                consoleLog.classList.add('show');
+
+                setTimeout(() => {
+                    consoleLog.classList.remove('show');
+                    consoleLog.style.color = '#00ff00';
+                }, 5000);
+            }
+        });
+
+        const githubStatsToggle = document.querySelector('.github-stats-toggle');
+        const githubStatsContainer = document.querySelector('.github-stats-container');
+
+        if (githubStatsToggle && githubStatsContainer) {
+            const toggleIcon = githubStatsToggle.querySelector('i');
+
+            githubStatsToggle.addEventListener('click', () => {
+                githubStatsContainer.classList.toggle('collapsed');
+
+                if (githubStatsContainer.classList.contains('collapsed')) {
+                    toggleIcon.classList.remove('fa-chevron-down');
+                    toggleIcon.classList.add('fa-chevron-up');
+                    githubStatsToggle.innerHTML = '<i class="fas fa-chevron-up"></i> Show GitHub Stats';
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-up');
+                    toggleIcon.classList.add('fa-chevron-down');
+                    githubStatsToggle.innerHTML = '<i class="fas fa-chevron-down"></i> Hide GitHub Stats';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
