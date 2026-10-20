@@ -13,7 +13,7 @@
     <style>
         :root {
             --bg: #050505;
-            --panel: rgba(8, 11, 11, 0.95);
+            --panel: rgba(8, 11, 11, 0.94);
             --panel-2: rgba(11, 16, 16, 0.96);
             --line: rgba(25, 255, 138, 0.8);
             --green: #19ff8a;
@@ -396,6 +396,7 @@
             padding: 16px 14px 14px;
             overflow: hidden;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            min-width: 0;
         }
 
         .skill-card:hover {
@@ -415,10 +416,13 @@
 
         .skill-head {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            min-height: 38px;
+            align-items: baseline;
+            gap: 0.42rem;
+            flex-wrap: nowrap;
+            min-width: 0;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
             margin-bottom: 10px;
         }
 
@@ -427,6 +431,7 @@
             font-weight: 700;
             font-size: clamp(1.15rem, 2.2vw, 1.7rem);
             line-height: 1;
+            flex-shrink: 0;
         }
 
         .skill-name {
@@ -435,6 +440,11 @@
             font-weight: 700;
             letter-spacing: -0.02em;
             line-height: 1.1;
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .skill-icon {
@@ -444,6 +454,7 @@
             color: var(--cyan);
             font-size: clamp(1.1rem, 2vw, 1.5rem);
             filter: drop-shadow(0 0 10px rgba(34,214,255,0.5));
+            flex-shrink: 0;
         }
 
         .skill-card .desc {
@@ -535,6 +546,19 @@
 
             .hobbies-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .skill-head {
+                flex-wrap: wrap;
+                white-space: normal;
+                gap: 0.2rem 0.4rem;
+            }
+
+            .skill-name {
+                flex-basis: auto;
+                white-space: normal;
+                overflow: visible;
+                text-overflow: unset;
             }
         }
     </style>
@@ -694,7 +718,7 @@ ____  _           _ _  __
                         <div class="skill-head">
                             <span class="def">def</span>
                             <span class="skill-icon"><i class="fas fa-heartbeat"></i></span>
-                            <span class="skill-name">biomedical_eng</span>
+                            <span class="skill-name">biomedical_engineering</span>
                             <span style="color: var(--yellow); font-weight: 700;">()</span>
                         </div>
                         <div class="desc">Applying technology to healthcare and medical device development.</div>
@@ -750,7 +774,6 @@ ____  _           _ _  __
                     </article>
                 </div>
             </div>
-
         </div>
     </div>
 
