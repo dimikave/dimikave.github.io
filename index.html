@@ -23,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* Matrix Rain Effect */
         .matrix-bg {
             position: fixed;
             top: 0;
@@ -294,7 +293,7 @@
         .interests-grid,
         .other-interests-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 20px;
             width: 100%;
             margin-top: 25px;
@@ -312,11 +311,13 @@
             max-width: 100%;
             min-width: 0;
             overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         .interest-card {
             border-left: 4px solid #00ff00;
             padding: 20px;
+            min-height: 210px;
         }
 
         .interest-item {
@@ -353,10 +354,12 @@
             font-size: 1.1rem;
             margin-bottom: 10px;
             color: #00ffff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: center;
+            display: block;
+            line-height: 1.2;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            text-align: left;
         }
 
         .interest-card h4::before {
@@ -368,13 +371,22 @@
         .interest-card h4::after {
             content: '():';
             color: #ffff00;
+            font-weight: bold;
+        }
+
+        .interest-card h4 i {
+            margin-right: 8px;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .interest-card p,
         .interest-item p {
             color: #aaa;
             font-size: 0.9rem;
+            line-height: 1.6;
             padding-left: 20px;
+            text-align: left;
         }
 
         .interest-card p::before {
@@ -498,6 +510,11 @@
                 padding: 16px;
             }
 
+            .interest-card p,
+            .interest-item p {
+                padding-left: 12px;
+            }
+
             .github-stats-container {
                 grid-template-columns: 1fr;
             }
@@ -609,79 +626,46 @@
                 <div class="interests-grid">
                     <div class="interest-card">
                         <h4><i class="fas fa-server"></i>backend_engineering</h4>
-                        <p>Building scalable and robust server-side applications</p>
+                        <p>Building scalable and robust server-side applications.</p>
                     </div>
 
                     <div class="interest-card">
                         <h4><i class="fas fa-cubes"></i>microservices</h4>
-                        <p>Designing distributed systems and service-oriented architectures</p>
+                        <p>Designing distributed systems and service-oriented architectures.</p>
                     </div>
 
                     <div class="interest-card">
                         <h4><i class="fas fa-cloud"></i>serverless_compute</h4>
-                        <p>Developing cloud-native solutions with AWS Lambda and similar technologies</p>
+                        <p>Developing cloud-native solutions with AWS Lambda and similar technologies.</p>
                     </div>
 
                     <div class="interest-card">
                         <h4><i class="fas fa-microchip"></i>iot_devices</h4>
-                        <p>Creating connected devices and IoT ecosystems</p>
+                        <p>Creating connected devices and IoT ecosystems.</p>
                     </div>
 
                     <div class="interest-card">
                         <h4><i class="fas fa-users"></i>user_management</h4>
-                        <p>Implementing secure authentication and authorization systems</p>
+                        <p>Implementing secure authentication and authorization systems.</p>
                     </div>
 
                     <div class="interest-card">
                         <h4><i class="fab fa-aws"></i>aws_cloud</h4>
-                        <p>Leveraging cloud services for scalable infrastructure and deployment</p>
+                        <p>Leveraging cloud services for scalable infrastructure and deployment.</p>
                     </div>
 
                     <div class="interest-card">
                         <h4><i class="fas fa-robot"></i>ai_agents</h4>
-                        <p>Developing intelligent systems and automated decision-making solutions</p>
+                        <p>Developing intelligent systems and automated decision-making solutions.</p>
                     </div>
 
                     <div class="interest-card">
-                        <h4><i class="fas fa-heartbeat"></i>biomedical_eng</h4>
-                        <p>Applying technology to healthcare and medical device development</p>
+                        <h4><i class="fas fa-heartbeat"></i>biomedical_engineering</h4>
+                        <p>Applying technology to healthcare and medical device development.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- GitHub Stats section is commented out, but the script is guarded below -->
-        <!--
-        <section class="terminal-window">
-            <div class="terminal-window-header">
-                <div class="terminal-buttons">
-                    <div class="terminal-button close"></div>
-                    <div class="terminal-button minimize"></div>
-                    <div class="terminal-button maximize"></div>
-                </div>
-                <span class="window-title">github_stats.sh - Analytics Dashboard</span>
-            </div>
-            <div class="terminal-content">
-                <h2 class="section-title">GitHub Stats</h2>
-                <div class="github-stats-toggle">
-                    <i class="fas fa-chevron-down"></i> Toggle GitHub Stats
-                </div>
-                <div class="github-stats-container">
-                    <div class="stat-card">
-                        <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=dimikave&theme=dracula" alt="Profile Details">
-                    </div>
-
-                    <div class="stat-card">
-                        <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=dimikave&theme=dracula" alt="Repos per Language">
-                    </div>
-
-                    <div class="stat-card">
-                        <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=dimikave&theme=dracula" alt="Most Commit Language">
-                    </div>
-                </div>
-            </div>
-        </section>
-        -->
 
         <section class="terminal-window">
             <div class="terminal-window-header">
@@ -694,6 +678,7 @@
             </div>
             <div class="terminal-content">
                 <h2 class="section-title">My Other Interests</h2>
+
                 <div class="other-interests-grid">
                     <div class="interest-item">
                         <i class="fas fa-skiing"></i>
